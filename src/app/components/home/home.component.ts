@@ -7,29 +7,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  items: string[] = [
-    'assets/images/rick-morty-1.jpg',
-    'assets/images/rick-morty-2.jpg',
-    'assets/images/rick-morty-3.jpg',
-    'assets/images/rick-morty-4.jpg',
-    'assets/images/rick-morty-5.jpg',
-    'assets/images/rick-morty-6.jpg',
-    'assets/images/rick-morty-7.jpg',
-    'assets/images/rick-morty-8.jpg',
-    'assets/images/rick-morty-9.jpg',
-    'assets/images/rick-morty-10.jpg',
-    'assets/images/rick-morty-1.jpg',
-    'assets/images/rick-morty-6.jpg'
-  ];
+  items: any[] = [];
 
   activePageData = [];
 
-  constructor() {
-    this.activePageData = this.items.slice(0, 4);
-  }
+  constructor() {}
 
   ngOnInit(): void {
 
+    for (let i = 1; i < 11; i++) {
+      this.items.push({
+        id: i,
+        imagem: 'assets/images/rick-morty-' + i + '.jpg'
+      });
+    }
+
+    this.activePageData = this.items.slice(0, 6);
   }
 
   onPageChanged(e) {

@@ -1,12 +1,18 @@
 mat-grid-list {
   padding: 30px;
-  width: 810px;
+  width: 800px;
 }
 
 mat-grid-tile {
-  background: lightgray;
+  background: black;
 }
 
 mat-card {
-  width: 450px;
+  width: 100%;
+  height: 100%;
+}
+
+mat-paginator {
+  font-size: 18px;
+  font-weight: bold;
 }

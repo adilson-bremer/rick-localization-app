@@ -8,3 +8,8 @@ mat-header-cell {
   font-size: 15px;
   background-color: #bbbbbb;
 }
+
+mat-paginator {
+  font-size: 14px;
+  font-weight: bold;
+}

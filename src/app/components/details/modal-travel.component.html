@@ -1,1 +1,27 @@
-<h1>MODAL VIAGEM</h1>
+<section>
+  <h1>AHH O DESTINO...</h1>
+  <form fxLayout="column" fxLayoutAlign="center" fxLayoutGap="10px" #f="ngForm" (ngSubmit)="onSubmit(f)">
+    <mat-form-field>
+      <mat-label>de onde viemos?</mat-label>
+      <mat-select aria-placeholder="Selecione a dimensão" ngModel name="idOrigem" required>
+        <mat-option value="c137">C137</mat-option>
+        <mat-option value="c135">C135</mat-option>
+        <mat-option value="c136">C136</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>para onde vamos?</mat-label>
+      <mat-select aria-placeholder="Selecione a dimensão" ngModel name="idDestino" required>
+        <mat-option value="c137">C137</mat-option>
+        <mat-option value="c135">C135</mat-option>
+        <mat-option value="c136">C136</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-dialog-actions>
+      <button mat-raised-button color="warn" [mat-dialog-close]="true">Melhor não</button>
+      <button mat-raised-button color="primary" [disabled]="f.invalid">Let's go Morty!</button>
+    </mat-dialog-actions>
+  </form>
+</section>

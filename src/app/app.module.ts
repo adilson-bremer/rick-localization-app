@@ -1,3 +1,4 @@
+import { DimensionalService } from './services/dimensional.service';
 import { AppRoutingModule } from './app-routing.module';
 import { MaterialModule } from './material.module';
 import { BrowserModule } from '@angular/platform-browser';
@@ -5,7 +6,7 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { HomeComponent } from './components/home/home.component';
@@ -18,17 +19,19 @@ import { ModalTravelComponent } from './components/details/modal-travel.componen
     AppComponent,
     HomeComponent,
     DetailsComponent,
-    TravelLogsComponent
+    TravelLogsComponent,
+    ModalTravelComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
+    ReactiveFormsModule,
     MaterialModule,
     AppRoutingModule,
     FlexLayoutModule
   ],
-  providers: [],
+  providers: [DimensionalService],
   bootstrap: [AppComponent],
   entryComponents: [ModalTravelComponent]
 })

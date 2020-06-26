@@ -30,7 +30,7 @@ export class DetailsComponent implements OnInit {
 
     this.dialog.open(ModalTravelComponent, {
       data: {
-        id: 1
+        idViajante: 1
       }
     });
 
