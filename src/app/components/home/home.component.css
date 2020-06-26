@@ -1,0 +1,12 @@
+mat-grid-list {
+  padding: 30px;
+  width: 810px;
+}
+
+mat-grid-tile {
+  background: lightgray;
+}
+
+mat-card {
+  width: 450px;
+}

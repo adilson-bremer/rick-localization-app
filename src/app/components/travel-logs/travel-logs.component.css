@@ -1,0 +1,10 @@
+.travels {
+  padding: 20px;
+  width: 600px;
+}
+
+mat-header-cell {
+  color: white;
+  font-size: 15px;
+  background-color: #bbbbbb;
+}

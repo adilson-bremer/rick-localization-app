@@ -1,0 +1,44 @@
+<div style="padding: 30px;" fxLayout="row" fxLayoutAlign="center center">
+  <div>
+    <img src="assets/images/rick-travels.png">
+  </div>
+  <div class="travels">
+    <h2>Viagens do Rick C137</h2>
+    <mat-table [dataSource]="dataSource" matSort>
+      <ng-container matColumnDef="viajante">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Viajante</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{ element.viajante }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="dimensao">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Dimensão</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{ element.dimensao }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="origem">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Origem</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{ element.origem }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="destino">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Destino</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{ element.destino }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="dataViagem">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Data Viagem</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{ element.dataViagem | date }}</mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+
+    <mat-paginator
+      [pageSize]="6"
+      [hidePageSize]="true">
+    </mat-paginator>
+
+    <a routerLink="/details" mat-raised-button color="accent" style="float: right; margin-top: 20px;">VOLTAR</a>
+  </div>
+</div>

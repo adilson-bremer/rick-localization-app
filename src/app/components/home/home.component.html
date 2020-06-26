@@ -1,0 +1,19 @@
+<div fxLayout="column" fxLayoutAlign="center center">
+  <div>
+    <mat-grid-list cols="2" rowHeight="2:1" fxFlex.lt-sm="370px">
+      <mat-grid-tile *ngFor="let item of activePageData">
+        <mat-card fxFlex.lt-sm="200px">
+          <a routerLink="/details"><img mat-card-image [src]="item"></a>
+        </mat-card>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </div>
+
+  <mat-paginator
+      [length]="items.length"
+      [pageSize]="4"
+      [pageSizeOptions]="['4', '8']"
+      (page)="onPageChanged($event)">
+  </mat-paginator>
+</div>
+
