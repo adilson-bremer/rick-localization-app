@@ -5,7 +5,7 @@
     <mat-grid-list cols="2" rowHeight="2:1" fxFlex.lt-sm="370px">
       <mat-grid-tile *ngFor="let item of activePageData">
         <mat-card fxFlex.lt-sm="370px" style="padding: 15px;">
-          <a [routerLink]="['/details/', item.id]"><img mat-card-image [src]="item.imagem"></a>
+          <a [routerLink]="['/details/', item.id]"><img mat-card-image src="assets/images/{{ item.imagem }}"></a>
         </mat-card>
       </mat-grid-tile>
     </mat-grid-list>

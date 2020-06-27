@@ -1,19 +1,23 @@
 <div class="details" fxLayout="column" fxLayoutAlign="center center">
-  <mat-card class="example-card">
+  <mat-card class="example-card" *ngIf="isLoaded && !hasError">
     <mat-card-header>
       <div mat-card-avatar class="example-header-image"></div>
       <mat-card-title>{{ model.dimensao }}</mat-card-title>
       <mat-card-subtitle>Dimensão</mat-card-subtitle>
     </mat-card-header>
-    <img mat-card-image [src]="model.imagem" alt="Photo of a Shiba Inu">
+    <img mat-card-image src="assets/images/{{ model.imagem }}" alt="Rick & Morty">
     <mat-card-content>
       <p>
         {{ model.descricao }}
       </p>
     </mat-card-content>
     <mat-card-actions fxLayoutAlign="center center">
-      <a routerLink="/travel-logs" mat-raised-button color="primary">HISTÓRICO DE VIAGENS</a>
+      <a [routerLink]="['/travel-logs', id]" mat-raised-button color="primary">HISTÓRICO DE VIAGENS</a>
       <button mat-raised-button color="warn" (click)="onNewEntry()">ADICIONAR VIAGEM</button>
     </mat-card-actions>
+  </mat-card>
+
+  <mat-card *ngIf="hasError">
+    <h2>Viajantes Rick & Morty não catalogados!</h2>
   </mat-card>
 </div>

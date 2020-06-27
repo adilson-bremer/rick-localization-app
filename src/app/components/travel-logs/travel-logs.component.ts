@@ -1,8 +1,12 @@
+import { DimensionalService } from './../../services/dimensional.service';
 import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
 import { TravelLogModel } from 'src/app/models/travel-log.model';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
+import { ActivatedRoute } from '@angular/router';
+import { error } from 'protractor';
+import { trigger } from '@angular/animations';
 
 @Component({
   selector: 'app-travel-logs',
@@ -11,7 +15,9 @@ import { MatPaginator } from '@angular/material/paginator';
 })
 export class TravelLogsComponent implements OnInit, AfterViewInit {
 
-  displayedColumns: string[] = ['viajante', 'dimensao', 'origem', 'destino', 'dataViagem'];
+  id: number;
+
+  displayedColumns: string[] = ['origem', 'destino', 'dataViagem'];
   dataSource = new MatTableDataSource<TravelLogModel>();
 
   @ViewChild(MatSort) sort: MatSort;
@@ -19,44 +25,21 @@ export class TravelLogsComponent implements OnInit, AfterViewInit {
 
   model: TravelLogModel[] = [];
 
-  model1: TravelLogModel = {
-    id: 1,
-    viajante: 'Rick 1',
-    dimensao: 'C137',
-    origem: 'C135',
-    destino: 'Z758',
-    dataViagem: new Date()
-  };
-
-  model2: TravelLogModel = {
-    id: 2,
-    viajante: 'Rick 2',
-    dimensao: 'C137',
-    origem: 'C135',
-    destino: 'Z758',
-    dataViagem: new Date()
-  };
-
-  model3: TravelLogModel = {
-    id: 3,
-    viajante: 'Rick 3',
-    dimensao: 'C137',
-    origem: 'C135',
-    destino: 'Z758',
-    dataViagem: new Date()
-  };
-
-  constructor() { }
+  constructor(private dimensionalService: DimensionalService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
 
-    for (let index = 0; index < 11; index++) {
-      this.model.push(this.model1);
-      this.model.push(this.model2);
-      this.model.push(this.model3);
-    }
+    this.route.paramMap.subscribe(params => {
+      this.id = Number(params.get('id'));
+    });
 
-    this.dataSource.data = this.model;
+    this.dimensionalService.getLogViagensViajante(this.id).subscribe(logs => {
+        this.model = logs;
+        this.dataSource.data = this.model;
+
+    }, e => {
+      console.log('ERROR: ' + e.message);
+    });
   }
 
   ngAfterViewInit() {

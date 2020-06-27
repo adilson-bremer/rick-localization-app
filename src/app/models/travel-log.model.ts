@@ -2,9 +2,7 @@ export interface TravelLogModel {
 
   id: number;
 
-  viajante: string;
-
-  dimensao: string;
+  viajanteId: number;
 
   origem: string;
 

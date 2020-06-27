@@ -1,19 +1,20 @@
-import { Component, Inject } from '@angular/core';
+import { DimensionalService } from './../../services/dimensional.service';
+import { Component, Inject, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { DimensaoModel } from 'src/app/models/dimensao.model';
 
 @Component({
   selector: 'app-modal-travel',
   templateUrl: './modal-travel.component.html'
 })
-export class ModalTravelComponent {
+export class ModalTravelComponent implements OnInit {
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any) {}
+  dimensoes: DimensaoModel[] = [];
 
-  onSubmit(form: NgForm) {
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private dimensionalService: DimensionalService) {}
 
-    console.log(this.data.idViajante);
-    console.log(form.value.idOrigem);
-    console.log(form.value.idDestino);
+  async ngOnInit() {
+    this.dimensoes = await this.dimensionalService.getDimensoes();
   }
 }

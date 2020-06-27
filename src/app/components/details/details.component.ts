@@ -1,7 +1,12 @@
+import { TravelLogCreateModel } from './../../models/travel-log-create.model';
+import { TravelLogModel } from 'src/app/models/travel-log.model';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { DimensionalService } from './../../services/dimensional.service';
 import { ModalTravelComponent } from './modal-travel.component';
 import { DetailsModel } from './../../models/details.model';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-details',
@@ -10,29 +15,75 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class DetailsComponent implements OnInit {
 
+  hasError = false;
+
+  isLoaded = false;
+
+  id: number;
+
   model: DetailsModel;
 
-  constructor(private dialog: MatDialog) { }
+  constructor(private dimensionalService: DimensionalService, private route: ActivatedRoute,
+              private dialog: MatDialog, private snackBar: MatSnackBar) {}
 
   ngOnInit(): void {
 
-    this.model = {
-      id: 10,
-      dimensao: 'C137',
-      imagem: 'assets/images/rick-morty-6.jpg',
-      descricao: `Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                  Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-                  when an unknown printer took a galley of type and scrambled it to make a type specimen book.`
-    };
+    this.route.paramMap.subscribe(params => {
+      this.id = Number(params.get('id'));
+    });
+
+    this.dimensionalService.getViajante(this.id).subscribe(viajante => {
+      this.model = viajante;
+      this.isLoaded = true;
+
+    }, error => {
+      this.hasError = true;
+      console.log('ERROR: ' + error.message);
+    });
   }
 
   onNewEntry() {
 
-    this.dialog.open(ModalTravelComponent, {
+    const dialogRef = this.dialog.open(ModalTravelComponent, {
       data: {
-        idViajante: 1
+        idViajante: this.id
       }
     });
 
+    dialogRef.afterClosed().subscribe(result => {
+
+      if (result !== 'canceled') {
+
+        const log: TravelLogCreateModel = {
+          viajanteId: this.id,
+          dimensaoOrigemId: result.idOrigem,
+          dimensaoDestinoId: result.idDestino,
+          dataViagem: new Date()
+        };
+
+        this.dimensionalService.addLogViagem(log).subscribe(response => {
+
+          // tslint:disable-next-line: no-string-literal
+          const success = response.body['success'];
+
+          if (success) {
+            this.openSnackBar('Viagem cadastrada com sucesso!');
+
+          } else {
+            this.openSnackBar('Ocorreu um erro, tente novamente mais tarde');
+          }
+        });
+      }
+
+    });
+  }
+
+  openSnackBar(message: string) {
+
+    this.snackBar.open(message, 'ENTENDIDO!', {
+      duration: 3000,
+      horizontalPosition: 'center',
+      verticalPosition: 'top'
+    });
   }
 }

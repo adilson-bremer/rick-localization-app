@@ -1,3 +1,5 @@
+import { DetailsModel } from './../../models/details.model';
+import { DimensionalService } from './../../services/dimensional.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,21 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  items: any[] = [];
+  items: DetailsModel[] = [];
 
   activePageData = [];
 
-  constructor() {}
+  constructor(private dimensionalService: DimensionalService) {}
 
-  ngOnInit(): void {
+  async ngOnInit() {
 
-    for (let i = 1; i < 11; i++) {
-      this.items.push({
-        id: i,
-        imagem: 'assets/images/rick-morty-' + i + '.jpg'
-      });
-    }
-
+    this.items = await this.dimensionalService.getViajantes();
     this.activePageData = this.items.slice(0, 6);
   }
 
