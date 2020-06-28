@@ -18,7 +18,7 @@ export class HomeComponent implements OnInit {
   async ngOnInit() {
 
     this.items = await this.dimensionalService.getViajantes();
-    this.activePageData = this.items.slice(0, 6);
+    this.activePageData = this.items.slice(0, 4);
   }
 
   onPageChanged(e) {

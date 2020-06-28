@@ -5,7 +5,7 @@ import { environment } from '../environments/environment';
 export class ApiUrlsSettins {
 
   private devUrl = 'http://localhost:55000/api/';
-  private prodUrl = 'http://localhost:55000/api/';
+  private prodUrl = 'https://rick-localization-api.azurewebsites.net/api/';
 
   private baseUrl = environment.production ? this.prodUrl : this.devUrl;
 

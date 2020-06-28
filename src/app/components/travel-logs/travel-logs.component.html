@@ -1,14 +1,18 @@
-<div style="padding: 30px;" fxLayout="row" fxLayoutAlign="center center">
+<div  fxFlex fxLayoutAlign="center center">
 
   <div>
-    <img src="assets/images/rick-travels.png">
+    <img src="assets/images/rick-travels.png" height="300">
   </div>
 
   <div fxLayout="column" fxLayoutAlign="center center">
-    <div class="travels" *ngIf="dataSource.data.length > 0">
-      <h2>Log de viagens Rick & Morty</h2>
 
-      <mat-table [dataSource]="dataSource" matSort>
+    <div>
+      <h2>Viagens Rick & Morty</h2>
+    </div>
+
+    <div *ngIf="dataSource.data.length > 0">
+
+      <mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort fxFlex>
         <ng-container matColumnDef="origem">
           <mat-header-cell *matHeaderCellDef mat-sort-header>Origem</mat-header-cell>
           <mat-cell *matCellDef="let element">{{ element.origem }}</mat-cell>
@@ -33,9 +37,9 @@
       <h2>Nenhuma viagem até o momento! :(</h2>
     </mat-card>
 
-    <div fxLayout="column" fxLayoutAlign="center center">
+    <div style="margin-top: 20px; width: 100%;" fxLayout="column" fxLayoutAlign="center center">
       <mat-paginator
-        [pageSize]="6"
+        [pageSize]="5"
         [hidePageSize]="true">
       </mat-paginator>
 

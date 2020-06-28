@@ -1,11 +1,12 @@
 <div fxLayout="column" fxLayoutAlign="center center">
-  <h2>Vá em frente, escolha uma dimensão!</h2>
+
+  <h5 style="border: 1px solid black; padding: 10px;">CLIQUE EM ALGUMA DIMENSÃO ABAIXO!</h5>
 
   <div>
-    <mat-grid-list cols="2" rowHeight="2:1" fxFlex.lt-sm="370px">
+    <mat-grid-list cols="2" rowHeight="1:1" fxFlex.lt-sm="360px">
       <mat-grid-tile *ngFor="let item of activePageData">
-        <mat-card fxFlex.lt-sm="370px" style="padding: 15px;">
-          <a [routerLink]="['/details/', item.id]"><img mat-card-image src="assets/images/{{ item.imagem }}"></a>
+        <mat-card>
+          <a [routerLink]="['/details/', item.id]"><img mat-card-image src="assets/images/{{ item.imagem }}" style="height: 100%;"></a>
         </mat-card>
       </mat-grid-tile>
     </mat-grid-list>
@@ -13,8 +14,8 @@
 
   <mat-paginator
       [length]="items.length"
-      [pageSize]="6"
-      [pageSizeOptions]="['6', '12']"
+      [pageSize]="4"
+      [pageSizeOptions]="['4', '8']"
       [hidePageSize]="true"
       (page)="onPageChanged($event)">
   </mat-paginator>
