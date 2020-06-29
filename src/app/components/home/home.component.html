@@ -1,6 +1,8 @@
 <div fxLayout="column" fxLayoutAlign="center center">
 
-  <h5 style="border: 1px solid black; padding: 10px;">CLIQUE EM ALGUMA DIMENSÃO ABAIXO!</h5>
+  <h5 style="border: 1px solid black; padding: 10px;" *ngIf="!isFetching">CLIQUE EM ALGUMA DIMENSÃO ABAIXO!</h5>
+
+  <h5 style="border: 1px solid black; padding: 10px; color: red;" *ngIf="isFetching">CARREGANDO DIMENSÕES...</h5>
 
   <div>
     <mat-grid-list cols="2" rowHeight="1:1" fxFlex.lt-sm="360px">
@@ -12,7 +14,7 @@
     </mat-grid-list>
   </div>
 
-  <mat-paginator
+  <mat-paginator *ngIf="!isFetching"
       [length]="items.length"
       [pageSize]="4"
       [pageSizeOptions]="['4', '8']"
